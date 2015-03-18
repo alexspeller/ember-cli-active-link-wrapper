@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-active-link-wrapper",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Simple link wrapper for active class.",
   "directories": {
     "doc": "doc",
     "test": "tests"

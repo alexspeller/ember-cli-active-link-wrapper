@@ -1,3 +1,13 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
 {{outlet}}
+<div id="index-link">
+  {{#active-link}}
+    {{link-to "Index" "index"}}
+  {{/active-link}}
+</div>
+<div id="other-link">
+  {{#active-link}}
+    {{link-to "Other" "other"}}
+  {{/active-link}}
+</div>

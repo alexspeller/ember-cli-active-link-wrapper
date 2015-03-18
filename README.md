@@ -1,17 +1,45 @@
-# Ember-cli-active-link-wrapper
+# ember-cli-active-link-wrapper
 
-This README outlines the details of collaborating on this Ember addon.
+A simple link wrapper to wrap active links in an element that inherits the link's active class. Useful for e.g. bootstrap where the active class should be on the containing `li` not on the `a`.
+
+## Usage
+
+```hbs
+{{#active-link}}
+  {{link-to "Index" "index"}}
+{{/active-link}}
+```
+
+Produces (roughly) the markup:
+
+```html
+<li class='active'>
+    <a href="/" class='active'>Index</a>
+</li>
+```
+
+You can change the tagName if you like, the default is `li`:
+
+```hbs
+{{#active-link tagName='div'}}
+  {{link-to "Index" "index"}}
+{{/active-link}}
+```
+
+```html
+<div class='active'>
+    <a href="/" class='active'>Index</a>
+</div>
+```
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+`ember install:addon ember-cli-active-link-wrapper`
 
 ## Running
 
 * `ember server`
-* Visit your app at http://localhost:4200.
+* Visit tests at http://localhost:4200/tests.
 
 ## Running Tests
 
