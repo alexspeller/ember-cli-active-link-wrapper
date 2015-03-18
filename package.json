@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-active-link-wrapper",
   "version": "0.0.1",
-  "description": "Simple link wrapper for active class.",
+  "description": "Simple ember-cli link wrapper to propagate active class to parent element",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -15,7 +15,17 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": {
+    "name": "Alex Speller"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexspeller/ember-cli-active-link-wrapper"
+  },
+  "bugs": {
+    "url": "https://github.com/alexspeller/ember-cli-active-link-wrapper/issues"
+  },
+  "homepage": "https://github.com/alexspeller/ember-cli-active-link-wrapper",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.0",
