@@ -1,4 +1,4 @@
-# ember-cli-active-link-wrapper [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-active-link-wrapper.svg)](http://emberobserver.com/addons/ember-cli-active-link-wrapper)
+# ember-cli-active-link-wrapper [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-active-link-wrapper.svg)](http://emberobserver.com/addons/ember-cli-active-link-wrapper) [![Build Status](https://travis-ci.org/alexspeller/ember-cli-active-link-wrapper.svg?branch=master)](https://travis-ci.org/alexspeller/ember-cli-active-link-wrapper)
 
 A simple link wrapper to wrap active links in an element that inherits the link's active class. Useful for e.g. bootstrap where the active class should be on the containing `li` not on the `a`.
 
