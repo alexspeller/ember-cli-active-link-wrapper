@@ -34,7 +34,7 @@ You can change the tagName if you like, the default is `li`:
 
 ## Installation
 
-`ember install:addon ember-cli-active-link-wrapper`
+`ember install ember-cli-active-link-wrapper`
 
 ## Running
 
