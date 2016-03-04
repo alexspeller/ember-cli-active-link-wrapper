@@ -30,6 +30,7 @@ There are several options available to adjust functionality:
 |---------------|--------------|-----------------------------------------------------------------|
 | tagName       | 'li'         | Components HTML tag name                                        |
 | activeClass   | _Computed_** | Class name to apply when any child `{{link-to}}` is also active |
+| disabledClass | _Computed_** | Class name to apply when ALL child `{{link-to}}`'s are disabled |
 
 ** Default class names are pulled from the child `{{link-to}}`,
 which in turn defaults to 'active'. You can change it on either
@@ -54,7 +55,8 @@ Change the element type by defining the `tagName`.
 
 Changing the `activeClass` on the `{{link-to}}` will also change
 it on the `{{active-link}}`. Or, you can specifically define what
-the `activeClass` will be for the `{{active-link}}`.
+the `activeClass` will be for the `{{active-link}}`. Similarly,
+the `disabledClass` functions the same way.
 
 ```hbs
 {{#active-link}}
@@ -71,6 +73,22 @@ the `activeClass` will be for the `{{active-link}}`.
 </li>
 <li class="enabled">
     <a href="/" class="active">Index</a>
+</li>
+```
+
+The active and/or disabled classes can be disabled (pun intended)
+by passing boolean `false`. This causes the class NOT to be applied,
+even if child `{{link-to}}`'s are active/disabled.
+
+```hbs
+{{#active-link disabledClass=false}}
+  {{link-to "Other" "other" disabled=true}}
+{{/active-link}}
+```
+
+```html
+<li>
+    <a href="/" class="disabled">Index</a>
 </li>
 ```
 

@@ -1,5 +1,11 @@
 <h2 id="title">Welcome to Ember</h2>
 
+<h4>Class Key</h4>
+<span class="active">.active</span>
+<span class="enabled">.enabled</span>
+<span class="disabled">.disabled</span>
+<span class="inactive">.inactive</span>
+
 <h4>Standard Usage</h4>
 <ul id="index-link">
   {{#active-link}}
@@ -9,6 +15,11 @@
 <ul id="other-link">
   {{#active-link}}
     {{link-to "Other" "other"}}
+  {{/active-link}}
+</ul>
+<ul id="index-link-disabled">
+  {{#active-link}}
+    {{link-to "Index (disabled)" "index" disabled=true}}
   {{/active-link}}
 </ul>
 
@@ -21,6 +32,18 @@
 <ul id="activelink-active-class">
   {{#active-link activeClass="enabled"}}
     {{link-to "Index" "index"}}
+  {{/active-link}}
+</ul>
+
+<h4>Changing Disabled Class</h4>
+<ul id="linkto-disabled-class">
+  {{#active-link}}
+    {{link-to "Other" "other" disabledClass="inactive" disabled=true}}
+  {{/active-link}}
+</ul>
+<ul id="activelink-disabled-class">
+  {{#active-link disabledClass="inactive"}}
+    {{link-to "Other" "other" disabled=true}}
   {{/active-link}}
 </ul>
 

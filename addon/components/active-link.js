@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNameBindings: ['_active'],
+  classNameBindings: ['_active','_disabled'],
 
   init() {
     this._super( ...arguments );
@@ -33,6 +33,19 @@ export default Ember.Component.extend({
 
   _active: Ember.computed('hasActiveLinks', 'activeClass', function(){
     return (this.get('hasActiveLinks') ? this.get('activeClass') : false);
+  }),
+
+  allLinksDisabled: Ember.computed('childLinkViews.@each.disabled', function(){
+    return this.get('childLinkViews').isEvery('disabled');
+  }),
+
+  disabledClass: Ember.computed('childLinkViews.@each.disabled', function(){
+    let disabledLink = this.get('childLinkViews').findBy('disabled');
+    return (disabledLink ? disabledLink.get('disabled') : 'disabled');
+  }),
+
+  _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function(){
+    return (this.get('allLinksDisabled') ? this.get('disabledClass') : false);
   })
 
 });

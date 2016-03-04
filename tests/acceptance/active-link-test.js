@@ -40,6 +40,16 @@ test('component should show correct active state', function(assert) {
   });
 });
 
+test('component should show correct disabled state', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'index');
+    assert.equal(find('#index-link-disabled li.disabled').length, 1);
+    assert.equal(find('#index-link-disabled li.disabled a.disabled').length, 1);
+  });
+});
+
 test('changed active class should be applied to the proper elements', function(assert) {
   visit('/');
 
@@ -49,5 +59,17 @@ test('changed active class should be applied to the proper elements', function(a
     assert.equal(find('#linkto-active-class a.enabled').length, 1);
     assert.equal(find('#activelink-active-class li.enabled').length, 1);
     assert.equal(find('#activelink-active-class a.active').length, 1);
+  });
+});
+
+test('changed disabled class should be applied to the proper elements', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'index');
+    assert.equal(find('#linkto-disabled-class li.inactive').length, 1);
+    assert.equal(find('#linkto-disabled-class a.inactive').length, 1);
+    assert.equal(find('#activelink-disabled-class li.inactive').length, 1);
+    assert.equal(find('#activelink-disabled-class a.disabled').length, 1);
   });
 });
