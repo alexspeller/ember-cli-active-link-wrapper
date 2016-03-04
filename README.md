@@ -1,6 +1,9 @@
 # ember-cli-active-link-wrapper [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-active-link-wrapper.svg)](http://emberobserver.com/addons/ember-cli-active-link-wrapper) [![Build Status](https://travis-ci.org/alexspeller/ember-cli-active-link-wrapper.svg?branch=master)](https://travis-ci.org/alexspeller/ember-cli-active-link-wrapper)
 
-A simple link wrapper to wrap active links in an element that inherits the link's active class. Useful for e.g. bootstrap where the active class should be on the containing `li` not on the `a`.
+A simple link wrapper to wrap active links in an element that inherits
+the link's active class. Useful for e.g. bootstrap where the active
+class should be on the containing `li` not on the `a`.
+
 
 ## Usage
 
@@ -18,9 +21,11 @@ Produces (roughly) the markup:
 </li>
 ```
 
+
 ## Installation
 
 `ember install ember-cli-active-link-wrapper`
+
 
 ## Options
 
@@ -37,6 +42,7 @@ There are several options available to adjust functionality:
 which in turn defaults to 'active'. You can change it on either
 the child `{{link-to}}` or directly on the `{{active-link}}`.
 See the examples below.
+
 
 ## Examples
 
@@ -140,6 +146,7 @@ Here is an example of a bootstrap dropdown within a navbar.
 </li>
 ```
 
+
 ## Mixin
 
 Functionality of the `{{active-link}}` component has been extracted
@@ -156,18 +163,25 @@ export default Ember.Component.extend(ActiveLinkMixin, {
 });
 ```
 
+
+## Development
+
+* `git clone` this repository
+* `npm install`
+* `bower install`
+
+
 ## Running
 
 * `ember server`
-* Visit tests at http://localhost:4200/tests.
+* Visit tests at http://localhost:4200/tests/
+
 
 ## Running Tests
 
+* `npm test` (Runs `ember try:testall` to test against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
-
-* `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
