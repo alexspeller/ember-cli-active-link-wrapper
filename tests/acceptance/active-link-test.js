@@ -39,3 +39,15 @@ test('component should show correct active state', function(assert) {
     });
   });
 });
+
+test('changed active class should be applied to the proper elements', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'index');
+    assert.equal(find('#linkto-active-class li.enabled').length, 1);
+    assert.equal(find('#linkto-active-class a.enabled').length, 1);
+    assert.equal(find('#activelink-active-class li.enabled').length, 1);
+    assert.equal(find('#activelink-active-class a.active').length, 1);
+  });
+});

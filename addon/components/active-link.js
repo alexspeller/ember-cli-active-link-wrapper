@@ -2,11 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNameBindings: ['active'],
-
-  active: Ember.computed('childLinkViews.@each.active', function() {
-    return this.get('childLinkViews').isAny('active');
-  }),
+  classNameBindings: ['_active'],
 
   init() {
     this._super( ...arguments );
@@ -24,6 +20,19 @@ export default Ember.Component.extend({
 
       this.set('childLinkViews', Ember.A(childLinkViews));
     });
-  }
+  },
+
+  hasActiveLinks: Ember.computed('childLinkViews.@each.active', function(){
+    return this.get('childLinkViews').isAny('active');
+  }),
+
+  activeClass: Ember.computed('childLinkViews.@each.active', function(){
+    let activeLink = this.get('childLinkViews').findBy('active');
+    return (activeLink ? activeLink.get('active') : 'active');
+  }),
+
+  _active: Ember.computed('hasActiveLinks', 'activeClass', function(){
+    return (this.get('hasActiveLinks') ? this.get('activeClass') : false);
+  })
 
 });

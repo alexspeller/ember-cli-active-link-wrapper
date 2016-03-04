@@ -1,6 +1,6 @@
 <h2 id="title">Welcome to Ember</h2>
 
-{{outlet}}
+<h4>Standard Usage</h4>
 <ul id="index-link">
   {{#active-link}}
     {{link-to "Index" "index"}}
@@ -11,3 +11,17 @@
     {{link-to "Other" "other"}}
   {{/active-link}}
 </ul>
+
+<h4>Changing Active Class</h4>
+<ul id="linkto-active-class">
+  {{#active-link}}
+    {{link-to "Index" "index" activeClass="enabled"}}
+  {{/active-link}}
+</ul>
+<ul id="activelink-active-class">
+  {{#active-link activeClass="enabled"}}
+    {{link-to "Index" "index"}}
+  {{/active-link}}
+</ul>
+
+{{outlet}}

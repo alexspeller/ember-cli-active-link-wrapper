@@ -4,3 +4,9 @@ li.active {
 a.active {
   background-color: #f45801;
 }
+li.enabled {
+  background-color: #a3f500;
+}
+a.enabled {
+  background-color: #47d600;
+}
