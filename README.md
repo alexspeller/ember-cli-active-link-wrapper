@@ -140,6 +140,22 @@ Here is an example of a bootstrap dropdown within a navbar.
 </li>
 ```
 
+## Mixin
+
+Functionality of the `{{active-link}}` component has been extracted
+into a mixin. That way you can `import` the mixin and use it in other
+components, such as dropdown's.
+
+```js
+// app/components/my-dropdown.js
+import Ember from 'ember';
+import ActiveLinkMixin from 'ember-cli-active-link-wrapper/mixins/active-link';
+
+export default Ember.Component.extend(ActiveLinkMixin, {
+  // your code (or extend from an another addon component)
+});
+```
+
 ## Running
 
 * `ember server`
