@@ -73,3 +73,13 @@ test('changed disabled class should be applied to the proper elements', function
     assert.equal(find('#activelink-disabled-class a.disabled').length, 1);
   });
 });
+
+test('change the linkSelector to look for a button', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'index');
+    assert.equal(find('#button-links li.active').length, 1);
+    assert.equal(find('#button-links li.active button.active').length, 1);
+  });
+});

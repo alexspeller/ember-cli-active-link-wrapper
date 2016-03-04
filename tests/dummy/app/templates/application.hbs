@@ -47,4 +47,11 @@
   {{/active-link}}
 </ul>
 
+<h4>Button Links</h4>
+<ul id="button-links">
+  {{#active-link linkSelector="button.ember-view"}}
+    {{link-to "Index" "index" tagName="button"}}
+  {{/active-link}}
+</ul>
+
 {{outlet}}

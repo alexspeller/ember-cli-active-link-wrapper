@@ -26,11 +26,12 @@ Produces (roughly) the markup:
 
 There are several options available to adjust functionality:
 
-| Option        | Default      | Description                                                     |
-|---------------|--------------|-----------------------------------------------------------------|
-| tagName       | 'li'         | Components HTML tag name                                        |
-| activeClass   | _Computed_** | Class name to apply when any child `{{link-to}}` is also active |
-| disabledClass | _Computed_** | Class name to apply when ALL child `{{link-to}}`'s are disabled |
+| Option        | Default        | Description                                                     |
+|---------------|----------------|-----------------------------------------------------------------|
+| tagName       | 'li'           | Components HTML tag name                                        |
+| linkSelector  | 'a.ember-view' | jQuery selector for child `{{link-to}}`'s                       |
+| activeClass   | _Computed_**   | Class name to apply when any child `{{link-to}}` is also active |
+| disabledClass | _Computed_**   | Class name to apply when ALL child `{{link-to}}`'s are disabled |
 
 ** Default class names are pulled from the child `{{link-to}}`,
 which in turn defaults to 'active'. You can change it on either
@@ -89,6 +90,22 @@ even if child `{{link-to}}`'s are active/disabled.
 ```html
 <li>
     <a href="/" class="disabled">Index</a>
+</li>
+```
+
+If the child `{{link-to}}`'s have their `tagName` changed,
+be sure to adjust the selector. Always include the `.ember-view`
+class since all link-to's apply that class.
+
+```hbs
+{{#active-link linkSelector="button.ember-view"}}
+  {{link-to "Index" "index" tagName="button"}}
+{{/active-link}}
+```
+
+```html
+<li class="active">
+    <button class="active">Index</button>
 </li>
 ```
 

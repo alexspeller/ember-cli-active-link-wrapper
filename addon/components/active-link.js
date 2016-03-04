@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'li',
   classNameBindings: ['_active','_disabled'],
+  linkSelector: 'a.ember-view',
 
   init() {
     this._super( ...arguments );
@@ -12,7 +13,8 @@ export default Ember.Component.extend({
   didRender() {
     this._super( ...arguments );
     Ember.run.schedule('afterRender', this, function() {
-      let childLinkElements = this.$('a.ember-view');
+      let childLinkSelector = this.get('linkSelector');
+      let childLinkElements = this.$(childLinkSelector);
 
       let childLinkViews = childLinkElements.toArray().map(view =>
         this._viewRegistry[view.id]
