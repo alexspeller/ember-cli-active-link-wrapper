@@ -1,3 +1,3 @@
-import activeLink from 'ember-cli-active-link-wrapper/components/active-link';
+import ActiveLinkComponent from 'ember-cli-active-link-wrapper/components/active-link';
 
-export default activeLink;
+export default ActiveLinkComponent;

@@ -1,6 +1,28 @@
-li.active {
+li.active,
+span.active {
   background-color: #f49c00;
 }
 a.active {
   background-color: #f45801;
+}
+li.enabled,
+span.enabled {
+  background-color: #a3f500;
+}
+a.enabled {
+  background-color: #47d600;
+}
+li.disabled,
+span.disabled {
+  background-color: #d6d6d6;
+}
+a.disabled {
+  background-color: #bababa;
+}
+li.inactive,
+span.inactive {
+  background-color: #7ec6f6;
+}
+a.inactive {
+  background-color: #2b9cf7;
 }
