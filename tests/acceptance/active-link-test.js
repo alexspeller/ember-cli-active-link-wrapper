@@ -83,3 +83,22 @@ test('change the linkSelector to look for a button', function(assert) {
     assert.equal(find('#button-links li.active button.active').length, 1);
   });
 });
+
+test('transitioning in and out classes', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    find('#other-link a').click();
+
+    let done = assert.async();
+
+    // need to wait for ember to have a chance to add the classes :)
+    Ember.run.later(() => {
+      assert.equal(find('#other-link li.ember-transitioning-in').length, 1);
+      assert.equal(find('#index-link li.ember-transitioning-out').length, 1);
+      done();
+    }, 1);
+
+  });
+
+});

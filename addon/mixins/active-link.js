@@ -1,8 +1,12 @@
 import Ember from 'ember';
 
+// these are not currently editable in Ember
+const transitioningInClass  = 'ember-transitioning-in';
+const transitioningOutClass = 'ember-transitioning-out';
+
 export default Ember.Mixin.create({
 
-  classNameBindings: ['_active','_disabled'],
+  classNameBindings: ['_active','_disabled','_transitioningIn','_transitioningOut'],
   linkSelector: 'a.ember-view',
 
   initChildLinkViews: Ember.on('init', function(){
@@ -20,6 +24,18 @@ export default Ember.Mixin.create({
 
       this.set('childLinkViews', Ember.A(childLinkViews));
     });
+  }),
+
+  _transitioningIn: Ember.computed('childLinkViews.@each.transitioningIn', function(){
+    if (this.get('childLinkViews').isAny('transitioningIn')) {
+      return transitioningInClass;
+    }
+  }),
+
+  _transitioningOut: Ember.computed('childLinkViews.@each.transitioningOut', function(){
+    if (this.get('childLinkViews').isAny('transitioningOut')) {
+      return transitioningOutClass;
+    }
   }),
 
   hasActiveLinks: Ember.computed('childLinkViews.@each.active', function(){
