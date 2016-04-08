@@ -43,6 +43,9 @@ which in turn defaults to 'active'. You can change it on either
 the child `{{link-to}}` or directly on the `{{active-link}}`.
 See the examples below.
 
+## Transition classes
+
+The `.ember-transitioning-in` and `.ember-transitioning-out` classes are also mirrored on the containing wrapper if they are present on the child `link-to`, allowing you to style the wrapper during router transitions.
 
 ## Examples
 
