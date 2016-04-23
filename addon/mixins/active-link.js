@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
   }),
 
   buildChildLinkViews: Ember.on('didRender', function(){
-    Ember.run.schedule('afterRender', this, function(){
+    Ember.run.next(this, function(){
       let childLinkSelector = this.get('linkSelector');
       let childLinkElements = this.$(childLinkSelector);
 
