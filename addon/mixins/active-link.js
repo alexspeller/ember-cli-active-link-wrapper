@@ -17,9 +17,11 @@ export default Ember.Mixin.create({
     Ember.run.schedule('afterRender', this, function(){
       let childLinkSelector = this.get('linkSelector');
       let childLinkElements = this.$(childLinkSelector);
+      let applicationContainer = Ember.getOwner(this).application.__container__;
+      let viewRegistry = applicationContainer.lookup('-view-registry:main') || Ember.View.views;
 
-      let childLinkViews = childLinkElements.toArray().map(view =>
-        this._viewRegistry[view.id]
+      let childLinkViews = childLinkElements.toArray().map(
+        view => viewRegistry[view.id]
       );
 
       this.set('childLinkViews', Ember.A(childLinkViews));
