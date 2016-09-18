@@ -9,17 +9,21 @@ export default Ember.Mixin.create({
   classNameBindings: ['_active','_disabled','_transitioningIn','_transitioningOut'],
   linkSelector: 'a.ember-view',
 
-  initChildLinkViews: Ember.on('init', function(){
-    this.set('childLinkViews', Ember.A());
-  }),
+  init() {
+    this._super(...arguments);
 
-  buildChildLinkViews: Ember.on('didRender', function(){
-    Ember.run.schedule('afterRender', this, function(){
+    this.set('childLinkViews',  Ember.A([]));
+  },
+
+  buildChildLinkViews: Ember.on('didReceiveAttrs', function(){
+    Ember.run.scheduleOnce('afterRender', this, function(){
       let childLinkSelector = this.get('linkSelector');
       let childLinkElements = this.$(childLinkSelector);
+      let applicationContainer = Ember.getOwner(this).application.__container__;
+      let viewRegistry = applicationContainer.lookup('-view-registry:main');
 
-      let childLinkViews = childLinkElements.toArray().map(view =>
-        this._viewRegistry[view.id]
+      let childLinkViews = childLinkElements.toArray().map(
+        view => viewRegistry[view.id]
       );
 
       this.set('childLinkViews', Ember.A(childLinkViews));
