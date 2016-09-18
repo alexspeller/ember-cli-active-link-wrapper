@@ -4,6 +4,9 @@ A simple link wrapper to wrap active links in an element that inherits
 the link's active class. Useful for e.g. bootstrap where the active
 class should be on the containing `li` not on the `a`.
 
+## Versions
+
+If you are using ember version earlier than `2.3.0`, install version `0.2.0` of this addon.
 
 ## Usage
 

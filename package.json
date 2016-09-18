@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-active-link-wrapper",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Simple ember-cli link wrapper to propagate active class to parent element",
   "directories": {
     "doc": "doc",
