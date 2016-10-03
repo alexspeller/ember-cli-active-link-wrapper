@@ -15,7 +15,7 @@ export default Ember.Mixin.create({
     this.set('childLinkViews',  Ember.A([]));
   },
 
-  buildChildLinkViews: Ember.on('didReceiveAttrs', function(){
+  buildChildLinkViews: Ember.on('didInsertElement', function(){
     Ember.run.scheduleOnce('afterRender', this, function(){
       let childLinkSelector = this.get('linkSelector');
       let childLinkElements = this.$(childLinkSelector);
@@ -55,7 +55,7 @@ export default Ember.Mixin.create({
   }),
 
   allLinksDisabled: Ember.computed('childLinkViews.@each.disabled', function(){
-    return this.get('childLinkViews').isEvery('disabled');
+    return !Ember.isEmpty(this.get('childLinkViews')) && this.get('childLinkViews').isEvery('disabled');
   }),
 
   disabledClass: Ember.computed('childLinkViews.@each.disabled', function(){
