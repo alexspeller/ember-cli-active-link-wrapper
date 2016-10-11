@@ -5,10 +5,11 @@ const transitioningInClass  = 'ember-transitioning-in';
 const transitioningOutClass = 'ember-transitioning-out';
 
 export default Ember.Mixin.create({
-  classNameBindings: ['_active', '_disabled', '_transitioningIn', '_transitioningOut'],
+  classNameBindings: ['_active','_disabled','_transitioningIn','_transitioningOut'],
 
   init() {
     this._super(...arguments);
+
     this.set('childLinkViews', Ember.A([]));
   },
 
@@ -17,18 +18,18 @@ export default Ember.Mixin.create({
   },
 
   _transitioningIn: Ember.computed('childLinkViews.@each.transitioningIn', function(){
-    if(this.get('childLinkViews').isAny('transitioningIn')) {
+    if (this.get('childLinkViews').isAny('transitioningIn')) {
       return transitioningInClass;
     }
   }),
 
   _transitioningOut: Ember.computed('childLinkViews.@each.transitioningOut', function(){
-    if(this.get('childLinkViews').isAny('transitioningOut')) {
+    if (this.get('childLinkViews').isAny('transitioningOut')) {
       return transitioningOutClass;
     }
   }),
 
-  hasActiveLinks: Ember.computed('childLinkViews.@each.active', function() {
+  hasActiveLinks: Ember.computed('childLinkViews.@each.active', function(){
     return this.get('childLinkViews').isAny('active');
   }),
 
@@ -37,11 +38,11 @@ export default Ember.Mixin.create({
     return (activeLink ? activeLink.get('active') : 'active');
   }),
 
-  _active: Ember.computed('hasActiveLinks', 'activeClass', function() {
-    return this.get('hasActiveLinks') ? this.get('activeClass') : false;
+  _active: Ember.computed('hasActiveLinks', 'activeClass', function(){
+    return (this.get('hasActiveLinks') ? this.get('activeClass') : false);
   }),
 
-  allLinksDisabled: Ember.computed('childLinkViews.@each.disabled', function() {
+  allLinksDisabled: Ember.computed('childLinkViews.@each.disabled', function(){
     return !Ember.isEmpty(this.get('childLinkViews')) && this.get('childLinkViews').isEvery('disabled');
   }),
 
@@ -50,7 +51,7 @@ export default Ember.Mixin.create({
     return (disabledLink ? disabledLink.get('disabled') : 'disabled');
   }),
 
-  _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function() {
-    return this.get('allLinksDisabled') ? this.get('disabledClass') : false;
+  _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function(){
+    return (this.get('allLinksDisabled') ? this.get('disabledClass') : false);
   })
 });
