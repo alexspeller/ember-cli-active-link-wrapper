@@ -1,3 +1,3 @@
-import ActiveLinkMixin from 'ember-cli-active-link-wrapper/mixins/active-link';
+import ActiveLinkContainerMixin from 'ember-cli-active-link-wrapper/mixins/active-link-container';
 
-export default ActiveLinkMixin;
+export default ActiveLinkContainerMixin;
