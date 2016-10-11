@@ -4,6 +4,7 @@ import ActiveLinkContainer from './active-link-container';
 export default Ember.LinkComponent.extend({
     init() {
         this._super(...arguments);
+        this.set('parentContainers', Ember.A([]));
         Ember.run.scheduleOnce('afterRender', this, 'registerWithParents');
     },
 
@@ -17,9 +18,18 @@ export default Ember.LinkComponent.extend({
         while(parent) {
             if(parent instanceof ActiveLinkContainer) {
                 parent.registerChild(this);
+                this.get('parentContainers').pushObject(parent);
             }
 
             parent = parent.get('parentView');
         }
-    }
+    },
+
+    deregisterFromParents() {
+        this.get('parentContainers').invoke('deregisterChild', this);
+    },
+
+    onWillDestroyElement: Ember.on('willDestroyElement', function() {
+        Ember.run.scheduleOnce('afterRender', this, 'deregisterFromParents');
+    })
 });

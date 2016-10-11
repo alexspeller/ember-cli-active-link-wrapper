@@ -54,4 +54,20 @@
   {{/active-link-container}}
 </ul>
 
+<h4>Nested Links &amp; Dynamic removal</h4>
+<ul id="nested-links">
+    {{#active-link-container}}
+        <a href="" {{action "noop"}}>Top Level Link</a>
+        <ul>
+            {{#each dynamicLinks as |link|}}
+                {{#active-link-container}}
+                        {{#active-link link.route}}
+                            {{link.label}} <button {{action "removeLink" link}} class="remove-btn">Remove</button>
+                        {{/active-link}}
+                {{/active-link-container}}
+            {{/each}}
+        </ul>
+    {{/active-link-container}}
+</ul>
+
 {{outlet}}

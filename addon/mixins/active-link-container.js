@@ -17,6 +17,10 @@ export default Ember.Mixin.create({
     this.get('childLinkViews').pushObject(view);
   },
 
+  deregisterChild(view) {
+    this.get('childLinkViews').removeObject(view);
+  },
+
   _transitioningIn: Ember.computed('childLinkViews.@each.transitioningIn', function(){
     if (this.get('childLinkViews').isAny('transitioningIn')) {
       return transitioningInClass;

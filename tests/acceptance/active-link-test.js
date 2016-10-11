@@ -102,3 +102,30 @@ test('transitioning in and out classes', function(assert) {
   });
 
 });
+
+test('container component should be active if nested links are active', function(assert) {
+  visit('/other');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'other');
+    assert.equal(find('#nested-links > li.active').length, 1);
+    assert.equal(find('#nested-links > li.active > ul > li.active > a.active').length, 1);
+  });
+});
+
+test('removing child links should update parent containers', function(assert) {
+  visit('/other');
+
+  andThen(function() {
+    assert.equal(currentPath(), 'other');
+    assert.equal(find('#nested-links > li.active').length, 1);
+    assert.equal(find('#nested-links > li.active > ul > li.active > a.active').length, 1);
+
+    click("#nested-links .remove-btn");
+
+    andThen(function() {
+      assert.equal(find('#nested-links > li > ul > li > a').length, 0);
+      assert.equal(find('#nested-links > li.active').length, 0);
+    });
+  });
+});
