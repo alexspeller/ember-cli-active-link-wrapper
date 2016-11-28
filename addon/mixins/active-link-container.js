@@ -5,29 +5,21 @@ const transitioningInClass  = 'ember-transitioning-in';
 const transitioningOutClass = 'ember-transitioning-out';
 
 export default Ember.Mixin.create({
-
   classNameBindings: ['_active','_disabled','_transitioningIn','_transitioningOut'],
-  linkSelector: 'a.ember-view',
 
   init() {
     this._super(...arguments);
 
-    this.set('childLinkViews',  Ember.A([]));
+    this.set('childLinkViews', Ember.A([]));
   },
 
-  buildChildLinkViews: Ember.on('didInsertElement', function(){
-    Ember.run.scheduleOnce('afterRender', this, function(){
-      let childLinkSelector = this.get('linkSelector');
-      let childLinkElements = this.$(childLinkSelector);
-      let viewRegistry = Ember.getOwner(this).lookup('-view-registry:main');
+  registerChild(view) {
+    this.get('childLinkViews').pushObject(view);
+  },
 
-      let childLinkViews = childLinkElements.toArray().map(
-        view => viewRegistry[view.id]
-      );
-
-      this.set('childLinkViews', Ember.A(childLinkViews));
-    });
-  }),
+  deregisterChild(view) {
+    this.get('childLinkViews').removeObject(view);
+  },
 
   _transitioningIn: Ember.computed('childLinkViews.@each.transitioningIn', function(){
     if (this.get('childLinkViews').isAny('transitioningIn')) {
@@ -66,5 +58,4 @@ export default Ember.Mixin.create({
   _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function(){
     return (this.get('allLinksDisabled') ? this.get('disabledClass') : false);
   })
-
 });

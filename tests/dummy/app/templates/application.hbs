@@ -8,50 +8,66 @@
 
 <h4>Standard Usage</h4>
 <ul id="index-link">
-  {{#active-link}}
-    {{link-to "Index" "index"}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Index" "index"}}
+  {{/active-link-container}}
 </ul>
 <ul id="other-link">
-  {{#active-link}}
-    {{link-to "Other" "other"}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Other" "other"}}
+  {{/active-link-container}}
 </ul>
 <ul id="index-link-disabled">
-  {{#active-link}}
-    {{link-to "Index (disabled)" "index" disabled=true}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Index (disabled)" "index" disabled=true}}
+  {{/active-link-container}}
 </ul>
 
 <h4>Changing Active Class</h4>
 <ul id="linkto-active-class">
-  {{#active-link}}
-    {{link-to "Index" "index" activeClass="enabled"}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Index" "index" activeClass="enabled"}}
+  {{/active-link-container}}
 </ul>
 <ul id="activelink-active-class">
-  {{#active-link activeClass="enabled"}}
-    {{link-to "Index" "index"}}
-  {{/active-link}}
+  {{#active-link-container activeClass="enabled"}}
+    {{active-link "Index" "index"}}
+  {{/active-link-container}}
 </ul>
 
 <h4>Changing Disabled Class</h4>
 <ul id="linkto-disabled-class">
-  {{#active-link}}
-    {{link-to "Other" "other" disabledClass="inactive" disabled=true}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Other" "other" disabledClass="inactive" disabled=true}}
+  {{/active-link-container}}
 </ul>
 <ul id="activelink-disabled-class">
-  {{#active-link disabledClass="inactive"}}
-    {{link-to "Other" "other" disabled=true}}
-  {{/active-link}}
+  {{#active-link-container disabledClass="inactive"}}
+    {{active-link "Other" "other" disabled=true}}
+  {{/active-link-container}}
 </ul>
 
 <h4>Button Links</h4>
 <ul id="button-links">
-  {{#active-link linkSelector="button.ember-view"}}
-    {{link-to "Index" "index" tagName="button"}}
-  {{/active-link}}
+  {{#active-link-container}}
+    {{active-link "Index" "index" tagName="button"}}
+  {{/active-link-container}}
+</ul>
+
+<h4>Nested Links &amp; Dynamic removal</h4>
+<ul id="nested-links">
+    {{#active-link-container}}
+        <a href="" {{action "noop"}}>Top Level Link</a>
+        <ul>
+            {{#each dynamicLinks as |link|}}
+                {{#active-link-container}}
+                        {{#active-link link.route}}
+                            {{link.label}} <button {{action "removeLink" link}} class="remove-btn">Remove</button>
+                        {{/active-link}}
+                {{/active-link-container}}
+            {{/each}}
+        </ul>
+    {{/active-link-container}}
 </ul>
 
 {{outlet}}
