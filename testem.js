@@ -1,7 +1,6 @@
-/*jshint node:true*/
+/* eslint-env node */
 module.exports = {
-  framework: "qunit",
-  test_page: "tests/index.html?hidepassed",
+  test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
   launch_in_ci: [
     'Chrome'
@@ -11,17 +10,13 @@ module.exports = {
   ],
   browser_args: {
     Chrome: {
-      ci: [
-        // --no-sandbox is needed when running Chrome inside a container
-        process.env.CI ? '--no-sandbox' : null,
-        '--headless',
+      mode: 'ci',
+      args: [
         '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--disable-software-rasterizer',
-        '--mute-audio',
+        '--headless',
         '--remote-debugging-port=0',
         '--window-size=1440,900'
-      ].filter(Boolean)
+      ]
     }
   }
 };
