@@ -1,29 +1,32 @@
 ---
 language: node_js
+dist: trusty
 node_js:
-  - "0.12"
+  - "6"
 
-sudo: false
+sudo: required
 
 cache:
   directories:
     - node_modules
 
+modules:
+  chrome: stable
+  
 env:
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
   - EMBER_TRY_SCENARIO=ember-canary
-
+  
 matrix:
   fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
-before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+before_install:  
   - "npm config set spin false"
-  - "npm install -g npm@^2"
+  - "npm install -g npm"
 
 install:
   - npm install -g bower
