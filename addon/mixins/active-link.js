@@ -1,10 +1,16 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { A } from '@ember/array';
+import { on } from '@ember/object/evented';
+import { scheduleOnce } from '@ember/runloop';
+import { getOwner } from '@ember/application';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 // these are not currently editable in Ember
 const transitioningInClass  = 'ember-transitioning-in';
 const transitioningOutClass = 'ember-transitioning-out';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   classNameBindings: ['_active','_disabled','_transitioningIn','_transitioningOut'],
   linkSelector: 'a.ember-view',
@@ -12,58 +18,58 @@ export default Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
-    this.set('childLinkViews',  Ember.A([]));
+    this.set('childLinkViews',  A([]));
   },
 
-  buildChildLinkViews: Ember.on('didInsertElement', function(){
-    Ember.run.scheduleOnce('afterRender', this, function(){
+  buildChildLinkViews: on('didInsertElement', function(){
+    scheduleOnce('afterRender', this, function(){
       let childLinkSelector = this.get('linkSelector');
       let childLinkElements = this.element.querySelectorAll(childLinkSelector);
-      let viewRegistry = Ember.getOwner(this).lookup('-view-registry:main');
+      let viewRegistry = getOwner(this).lookup('-view-registry:main');
 
       let childLinkViews = Array.prototype.map.call(childLinkElements,
         view => viewRegistry[view.id]
       );
 
-      this.set('childLinkViews', Ember.A(childLinkViews));
+      this.set('childLinkViews', A(childLinkViews));
     });
   }),
 
-  _transitioningIn: Ember.computed('childLinkViews.@each.transitioningIn', function(){
+  _transitioningIn: computed('childLinkViews.@each.transitioningIn', function(){
     if (this.get('childLinkViews').isAny('transitioningIn')) {
       return transitioningInClass;
     }
   }),
 
-  _transitioningOut: Ember.computed('childLinkViews.@each.transitioningOut', function(){
+  _transitioningOut: computed('childLinkViews.@each.transitioningOut', function(){
     if (this.get('childLinkViews').isAny('transitioningOut')) {
       return transitioningOutClass;
     }
   }),
 
-  hasActiveLinks: Ember.computed('childLinkViews.@each.active', function(){
+  hasActiveLinks: computed('childLinkViews.@each.active', function(){
     return this.get('childLinkViews').isAny('active');
   }),
 
-  activeClass: Ember.computed('childLinkViews.@each.active', function(){
+  activeClass: computed('childLinkViews.@each.active', function(){
     let activeLink = this.get('childLinkViews').findBy('active');
     return (activeLink ? activeLink.get('active') : 'active');
   }),
 
-  _active: Ember.computed('hasActiveLinks', 'activeClass', function(){
+  _active: computed('hasActiveLinks', 'activeClass', function(){
     return (this.get('hasActiveLinks') ? this.get('activeClass') : false);
   }),
 
-  allLinksDisabled: Ember.computed('childLinkViews.@each.disabled', function(){
-    return !Ember.isEmpty(this.get('childLinkViews')) && this.get('childLinkViews').isEvery('disabled');
+  allLinksDisabled: computed('childLinkViews.@each.disabled', function(){
+    return !isEmpty(this.get('childLinkViews')) && this.get('childLinkViews').isEvery('disabled');
   }),
 
-  disabledClass: Ember.computed('childLinkViews.@each.disabled', function(){
+  disabledClass: computed('childLinkViews.@each.disabled', function(){
     let disabledLink = this.get('childLinkViews').findBy('disabled');
     return (disabledLink ? disabledLink.get('disabled') : 'disabled');
   }),
 
-  _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function(){
+  _disabled: computed('allLinksDisabled', 'disabledClass', function(){
     return (this.get('allLinksDisabled') ? this.get('disabledClass') : false);
   })
 

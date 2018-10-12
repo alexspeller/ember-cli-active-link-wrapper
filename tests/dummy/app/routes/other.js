@@ -1,14 +1,17 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { Promise } from 'rsvp';
+import { later } from '@ember/runloop';
 
-export default Ember.Route.extend({
+
+export default Route.extend({
 
   // add a very slight delay so that we can test the
   // transitioningIn/Out classes.
   model() {
-    return new Ember.RSVP.Promise((resolve) => {
-      Ember.run.later(() => {
+    return new Promise((resolve) => {
+      later(() => {
         resolve();
-      }, 10);
+      }, 100);
     });
   }
 
