@@ -64,7 +64,7 @@ export default Ember.Mixin.create({
   }),
 
   _disabled: Ember.computed('allLinksDisabled', 'disabledClass', function(){
-    return (this.get('allLinksDisabled') ? this.get('disabledClass') : false);
+    return (this.get('disabled') || this.get('allLinksDisabled') ? this.get('disabledClass') : false);
   })
 
 });

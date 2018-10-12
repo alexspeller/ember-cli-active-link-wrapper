@@ -40,6 +40,7 @@ There are several options available to adjust functionality:
 | linkSelector  | 'a.ember-view' | jQuery selector for child `{{link-to}}`'s                       |
 | activeClass   | _Computed_**   | Class name to apply when any child `{{link-to}}` is also active |
 | disabledClass | _Computed_**   | Class name to apply when ALL child `{{link-to}}`'s are disabled |
+| disable       | null           | Boolean: ignore children and apply the disabled class           |
 
 ** Default class names are pulled from the child `{{link-to}}`,
 which in turn defaults to 'active'. You can change it on either
@@ -102,6 +103,21 @@ even if child `{{link-to}}`'s are active/disabled.
 ```html
 <li>
     <a href="/" class="disabled">Index</a>
+</li>
+```
+
+The the parent element can be forcibly disabled
+by passing a boolean `true` for disabled.
+
+```hbs
+{{#active-link disabled=true}}
+  {{link-to "Index" "index"}}
+{{/active-link}}
+```
+
+```html
+<li class"disabled">
+    <a href="/" class="active">Index</a>
 </li>
 ```
 
